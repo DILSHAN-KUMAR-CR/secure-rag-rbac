@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin | Secure RAG</title>
+  <link rel="icon" href="/ui-static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/ui-static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="/ui/chat">Secure RAG</a>
+    <nav>
+      <a class="nav-link" href="/ui/chat">Ask</a>
+      <span id="identity" class="identity-pill">Loading account…</span>
+      <button id="logout-button" class="ghost-button" type="button">Log out</button>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero-copy compact-hero">
+      <p class="eyebrow">Administration</p>
+      <h1>Access and knowledge controls</h1>
+      <p>Manage accounts, document permissions, the vector index, and safe security-event metadata.</p>
+    </section>
+
+    <p id="admin-message" class="message" role="status" aria-live="polite"></p>
+
+    <section class="admin-grid">
+      <article class="panel span-two">
+        <div class="panel-heading"><div><p class="eyebrow">Identity</p><h2>Users</h2></div></div>
+        <form id="create-user-form" class="inline-form">
+          <input id="new-username" placeholder="Username" maxlength="80" required>
+          <input id="new-password" type="password" placeholder="Temporary password" minlength="10" maxlength="128" required>
+          <select id="new-role"><option>Employee</option><option>HR</option><option>Admin</option></select>
+          <button class="primary-button" type="submit">Create user</button>
+        </form>
+        <div class="table-scroll"><table><thead><tr><th>User</th><th>Role</th><th>Status</th><th>Permission version</th><th>Actions</th></tr></thead><tbody id="users-body"></tbody></table></div>
+      </article>
+
+      <article class="panel span-two">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Knowledge</p><h2>Documents</h2></div>
+          <button id="reindex-button" class="secondary-button" type="button">Rebuild vector index</button>
+        </div>
+        <form id="upload-form" class="inline-form upload-form">
+          <input id="document-title" placeholder="Document title" maxlength="200" required>
+          <input id="document-file" type="file" accept=".pdf,.txt" required>
+          <fieldset class="role-fieldset"><legend>Allowed roles</legend><label><input type="checkbox" name="upload-role" value="Employee">Employee</label><label><input type="checkbox" name="upload-role" value="HR">HR</label><label><input type="checkbox" name="upload-role" value="Admin" checked>Admin</label></fieldset>
+          <button class="primary-button" type="submit">Upload and index</button>
+        </form>
+        <div class="table-scroll"><table><thead><tr><th>Document</th><th>Status</th><th>Chunks</th><th>Allowed roles</th><th>Action</th></tr></thead><tbody id="documents-body"></tbody></table></div>
+      </article>
+
+      <article class="panel span-two">
+        <div class="panel-heading"><div><p class="eyebrow">Security</p><h2>Audit logs</h2></div><button id="refresh-audit" class="secondary-button" type="button">Refresh</button></div>
+        <form id="audit-filter-form" class="inline-form filters">
+          <input id="audit-action" placeholder="Action, e.g. rag_query" maxlength="80">
+          <select id="audit-decision"><option value="">All decisions</option><option value="allowed">Allowed</option><option value="denied">Denied</option><option value="no_accessible_source">No accessible source</option><option value="error">Error</option></select>
+          <input id="audit-user-id" type="number" min="1" placeholder="User ID">
+          <button class="secondary-button" type="submit">Apply filters</button>
+        </form>
+        <div class="table-scroll"><table><thead><tr><th>Time</th><th>User</th><th>Action</th><th>Decision</th><th>Documents</th><th>Gemini</th><th>Status</th><th>Duration</th></tr></thead><tbody id="audit-body"></tbody></table></div>
+      </article>
+    </section>
+  </main>
+  <script src="/ui-static/common.js" defer></script>
+  <script src="/ui-static/admin.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ask | Secure RAG</title>
+  <link rel="icon" href="/ui-static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/ui-static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="/ui/chat">Secure RAG</a>
+    <nav>
+      <a id="admin-link" class="nav-link hidden" href="/ui/admin">Admin</a>
+      <span id="identity" class="identity-pill">Loading account…</span>
+      <button id="logout-button" class="ghost-button" type="button">Log out</button>
+    </nav>
+  </header>
+
+  <main class="page-shell narrow-shell">
+    <section class="hero-copy">
+      <p class="eyebrow">Authorized knowledge assistant</p>
+      <h1>Ask your organization’s documents</h1>
+      <p>The server checks your current role before retrieval. Only permitted excerpts can be sent to Gemini or returned as citations.</p>
+    </section>
+
+    <section class="query-card">
+      <form id="question-form">
+        <label for="question">Your question</label>
+        <textarea id="question" maxlength="500" rows="4" placeholder="Example: How many remote work days are permitted?" required></textarea>
+        <div class="form-actions">
+          <label class="compact-field">Sources
+            <select id="top-k">
+              <option value="1">1</option>
+              <option value="3" selected>3</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+          <button id="preview-button" type="button" class="secondary-button">Preview safe context</button>
+          <button id="ask-button" type="submit" class="primary-button">Ask Gemini</button>
+        </div>
+      </form>
+      <p id="query-message" class="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="result-card" class="result-card hidden" aria-live="polite">
+      <div class="result-heading">
+        <div><p class="eyebrow">Result</p><h2 id="result-status">Answer</h2></div>
+        <span id="result-role" class="identity-pill"></span>
+      </div>
+      <div id="answer" class="answer-text"></div>
+      <div id="context-block" class="hidden">
+        <h3>Authorized context preview</h3>
+        <pre id="context-text"></pre>
+      </div>
+      <div>
+        <h3>Sources</h3>
+        <ol id="citations" class="citation-list"></ol>
+      </div>
+      <p id="timings" class="muted"></p>
+    </section>
+  </main>
+  <script src="/ui-static/common.js" defer></script>
+  <script src="/ui-static/chat.js" defer></script>
+</body>
+</html>

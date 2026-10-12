@@ -1,0 +1,3 @@
+Department Announcements
+
+This fictional document is available to Employee, HR, and Admin roles. The quarterly town hall is scheduled for 15 October at 3:00 PM in the main auditorium. Remote employees may join through the internal meeting link. The facilities team will conduct a fire-safety drill on 22 October at 11:00 AM. These dates exist only for testing the Secure RAG demonstration.

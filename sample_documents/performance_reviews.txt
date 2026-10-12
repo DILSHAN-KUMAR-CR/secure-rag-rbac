@@ -1,0 +1,3 @@
+Confidential Performance Reviews
+
+This fictional HR record states that Alice Example received a performance rating of Exceeds Expectations and Bob Example received a performance rating of Meets Expectations. Only HR and Admin roles may retrieve these invented reviews. They are synthetic values created exclusively for testing permission-aware retrieval.

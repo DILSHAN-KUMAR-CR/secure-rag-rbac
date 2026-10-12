@@ -1,0 +1,23 @@
+
+[
+  {
+    "query": "How many days of annual paid leave do employees receive?",
+    "role_name": "Employee",
+    "relevant_chunk_ids": [1]
+  },
+  {
+    "query": "Who handles employee leave policy questions?",
+    "role_name": "HR",
+    "relevant_chunk_ids": [1]
+  },
+  {
+    "query": "How many days per week can employees work remotely?",
+    "role_name": "Employee",
+    "relevant_chunk_ids": [2]
+  },
+  {
+    "query": "Who approves remote work requests?",
+    "role_name": "HR",
+    "relevant_chunk_ids": [2]
+  }
+]

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | Secure RAG</title>
+  <link rel="icon" href="/ui-static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/ui-static/styles.css">
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="brand-panel" aria-label="Product introduction">
+      <p class="eyebrow">Permission-aware AI</p>
+      <h1>Secure RAG<br>with RBAC</h1>
+      <p>Only documents permitted for your current role can enter retrieval, model context, answers, citations, or audit metadata.</p>
+      <div class="flow-list" aria-label="Security flow">
+        <span>Authenticate</span><span>Authorize</span><span>Retrieve</span><span>Recheck</span><span>Answer</span>
+      </div>
+    </section>
+
+    <section class="auth-card">
+      <div>
+        <p class="eyebrow">Welcome back</p>
+        <h2>Sign in to continue</h2>
+        <p class="muted">Use an account created by the system administrator.</p>
+      </div>
+      <form id="login-form" class="stack-form">
+        <label>Username
+          <input id="username" name="username" autocomplete="username" maxlength="80" required>
+        </label>
+        <label>Password
+          <input id="password" name="password" type="password" autocomplete="current-password" maxlength="128" required>
+        </label>
+        <button type="submit" class="primary-button">Sign in</button>
+      </form>
+      <p id="login-message" class="message" role="status" aria-live="polite"></p>
+      <a class="subtle-link" href="/docs">Open developer API documentation</a>
+    </section>
+  </main>
+  <script src="/ui-static/common.js" defer></script>
+  <script src="/ui-static/login.js" defer></script>
+</body>
+</html>
