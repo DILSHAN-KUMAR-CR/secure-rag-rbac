@@ -1,236 +1,153 @@
-<div align="center">
+# Secure RAG with Role-Based Access Control (RBAC)
 
-# Secure RAG with Role-Based Access Control
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white" alt="Python badge" />
+  <img src="https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white" alt="FastAPI badge" />
+  <img src="https://img.shields.io/badge/SQLite-Database-003B57?logo=sqlite&logoColor=white" alt="SQLite badge" />
+  <img src="https://img.shields.io/badge/Qdrant-Vector%20Store-DC244C" alt="Qdrant badge" />
+  <img src="https://img.shields.io/badge/Pytest-Testing-0A9EDC?logo=pytest&logoColor=white" alt="Pytest badge" />
+</p>
 
-### A permission-aware document retrieval and question-answering API
+<p align="center">
+  <a href="https://github.com/DILSHAN-KUMAR-CR/secure-rag-rbac">
+    <img src="https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white" alt="GitHub repository badge" />
+  </a>
+  <img src="https://img.shields.io/badge/Access%20Control-RBAC-orange" alt="RBAC badge" />
+</p>
 
-[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![SQLite](https://img.shields.io/badge/SQLite-Permissions-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
-[![Qdrant](https://img.shields.io/badge/Qdrant-Vector%20Search-DC244C?logo=qdrant&logoColor=white)](https://qdrant.tech/)
-[![Pytest](https://img.shields.io/badge/Tests-Pytest-0A9EDC?logo=pytest&logoColor=white)](https://pytest.org/)
-[![GitHub repo](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)](https://github.com/DILSHAN-KUMAR-CR/secure-rag-rbac)
-[![Platform](https://img.shields.io/badge/Platform-Windows-0078D4?logo=windows&logoColor=white)](https://www.microsoft.com/windows)
-
-**Authenticate · Filter permitted documents · Retrieve relevant chunks · Recheck permissions**
-
-</div>
-
----
+A secure Retrieval-Augmented Generation (RAG) application that applies role-based access control to document retrieval. Built with FastAPI, SQLite, and a local Qdrant vector store.
 
 ## Overview
 
-Secure RAG with Role-Based Access Control (RBAC) is a document retrieval application designed to prevent users from retrieving documents that their role is not allowed to access.
-
-The application uses **FastAPI** for its API, **SQLite** as the source of truth for users and document permissions, and **Qdrant** for local vector search. It supports keyword retrieval, semantic retrieval, and hybrid retrieval techniques. Access permissions are applied during retrieval so that relevant but unauthorized documents are not returned to the user.
-
-The project uses fictional policy documents to demonstrate role-based access, including an HR-only salary policy.
+This project demonstrates how to retrieve relevant documents while respecting user roles and document permissions. Access checks are applied so users can retrieve only documents their role is authorized to access.
 
 ## Features
 
-- User authentication and role-based authorization.
-- Admin-managed users and document permissions.
-- PDF and text document ingestion, chunking, and indexing.
-- Keyword-based document retrieval.
-- Semantic retrieval using local vector search.
-- Hybrid retrieval that combines keyword and semantic rankings with Reciprocal Rank Fusion (RRF).
-- Permission checks against the user's role and allowed document IDs.
-- RAG context preparation with authorization rechecks.
-- Retrieval evaluation using Precision@K, Recall@K, and Mean Reciprocal Rank (MRR@K).
-- Automated tests for application behavior and access control.
+- **Role-based access control (RBAC)** for document retrieval
+- **Document management** and indexing
+- **Semantic and keyword-based retrieval**
+- **Hybrid retrieval support**
+- **FastAPI REST API** with interactive Swagger documentation
+- **SQLite** for application data
+- **Qdrant** for local vector storage
+- **Automated tests** for core functionality
 
 ## Technology Stack
 
-| Technology | Purpose |
+- **Backend:** Python, FastAPI
+- **Database:** SQLite
+- **Vector store:** Qdrant (local storage)
+- **API documentation:** Swagger UI / OpenAPI
+- **Testing:** Pytest
+
+## Role-Based Access Control
+
+Documents are associated with permitted roles. A user can retrieve a document only when their role is authorized by that document's access policy.
+
+Example policy configured in the project:
+
+| Document | Permitted roles |
 |---|---|
-| Python | Application logic |
-| FastAPI | REST API and interactive API documentation |
-| SQLite | Users, documents, chunks, and role permissions |
-| Qdrant local mode | Vector storage and semantic retrieval |
-| FastEmbed / embeddings | Text embeddings for semantic search |
-| Pytest | Automated tests |
-| Git and GitHub | Version control and repository hosting |
+| Company Leave Policy | Employee, HR |
+| Remote Work Policy | Employee, HR |
+| Salary Administration Policy | HR |
 
-## How RBAC Works
-
-1. A user authenticates and makes a request.
-2. The application identifies the user's current role.
-3. The application determines which document IDs the role can access.
-4. Retrieval searches only permitted content.
-5. The application rechecks canonical document data and permissions before preparing RAG context.
-
-### Example access policy
-
-| Document | Employee | HR | Admin |
-|---|---:|---:|---:|
-| Company Leave Policy | Allowed | Allowed | Depends on configured document permissions |
-| Remote Work Policy | Allowed | Allowed | Depends on configured document permissions |
-| Salary Administration Policy | Blocked | Allowed | Depends on configured document permissions |
-
-**Note:** Document access is controlled by each document's configured permissions. Admin management privileges do not automatically grant access to every document during retrieval.
+The examples above describe the project's configured document permissions. Actual access depends on the authenticated user's role and the API's authorization checks.
 
 ## Project Structure
 
 ```text
-secure-rag-rbac/
+secure-rag-rbac-main/
 ├── app/
-│   ├── main.py
-│   ├── rag_service.py
-│   ├── retrieval_service.py
-│   ├── vector_service.py
-│   ├── hybrid_retrieval_service.py
-│   ├── evaluate_retrieval.py
-│   └── inspect_chunks.py
 ├── data/
-│   ├── secure_rag.db       # Created locally; do not commit
-│   └── vector_store/       # Created locally; do not commit
-├── evaluation/
-│   └── retrieval_cases.json
+│   ├── secure_rag.db
+│   └── vector_store/
 ├── tests/
-├── screenshots/
-├── .gitignore
+├── .venv/
 ├── README.md
-└── requirements.txt
+└── ...
 ```
 
-Your local project may contain additional modules or folders.
+*Note: The exact files and folders may vary depending on the repository version. Keep the local database and vector-store data if you want to preserve your indexed documents.*
 
-## Requirements
-
-- Python 3
-- Git
-- Windows PowerShell or another terminal
-- Dependencies listed in `requirements.txt`
-
-## Installation and Setup
+## Getting Started
 
 ### 1. Clone the repository
 
-```powershell
+```bash
 git clone https://github.com/DILSHAN-KUMAR-CR/secure-rag-rbac.git
 cd secure-rag-rbac
 ```
 
-If you already have the project locally, skip cloning and open PowerShell in the project folder.
+### 2. Create and activate a virtual environment
 
-### 2. Create a virtual environment
+On Windows PowerShell:
 
 ```powershell
 python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
+
+If PowerShell blocks script activation, you can use the environment's Python executable directly instead.
 
 ### 3. Install dependencies
 
+If the repository contains `requirements.txt`:
+
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
+If dependencies are managed through another project file, follow that file's installation instructions.
+
 ### 4. Start the API
+
+From the project root, run:
 
 ```powershell
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --reload
 ```
 
+If the virtual environment is activated, this may also work:
+
+```bash
+uvicorn app.main:app --reload
+```
+
 ### 5. Open the API documentation
 
-- Swagger UI: http://127.0.0.1:8000/docs
-- Health endpoint: http://127.0.0.1:8000/health
+- **Swagger UI:** http://127.0.0.1:8000/docs
+- **Health endpoint:** http://127.0.0.1:8000/health
 
-## Sample Documents Used
-
-The local demonstration includes these fictional documents:
-
-- **Company Leave Policy** — accessible to Employee and HR.
-- **Remote Work Policy** — accessible to Employee and HR.
-- **Salary Administration Policy** — accessible to HR only.
-
-Upload documents through the Admin document endpoint and reindex them when required.
+Use Swagger UI to inspect the available endpoints and send API requests.
 
 ## API Endpoints
 
-| Endpoint | Purpose |
-|---|---|
-| `POST /auth/login` | Authenticate a user |
-| `GET /auth/me` | Inspect the authenticated account, if enabled in the current version |
-| `GET /admin/users` | List users as an Admin |
-| `POST /admin/users` | Create a user as an Admin |
-| `GET /admin/documents` | List documents and configured permissions |
-| `POST /admin/documents` | Upload a document |
-| `PATCH /admin/documents/{document_id}/permissions` | Update document access |
-| `POST /admin/documents/reindex` | Rebuild the vector index |
-| `POST /retrieval/search` | Search permitted chunks by keyword |
-| `POST /retrieval/semantic-search` | Search permitted chunks semantically |
-| `POST /rag/context-preview` | Preview authorized context, if enabled |
-| `POST /rag/ask` | Ask a question using retrieved context, if enabled |
-| `GET /health` | Check API health |
+The application exposes API routes for health checks, authentication/user management, document operations, retrieval, and RAG queries. Exact paths and request schemas depend on the current application implementation.
 
-The exact routes available are those shown in the running application's Swagger UI at `/docs`.
+Open `http://127.0.0.1:8000/docs` to view the authoritative list of endpoints and their required inputs.
 
 ## Testing
 
-Run the automated test suite:
+Run the project's test suite from the repository root. For example, if Pytest is installed:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe -m pytest
 ```
 
-Run the retrieval evaluation with the API server stopped, to avoid opening the local Qdrant storage from multiple processes:
-
-```powershell
-.\.venv\Scripts\python.exe -m app.evaluate_retrieval
-```
-
-The evaluation compares keyword, semantic, and hybrid retrieval using Precision@K, Recall@K, and MRR@K. Evaluation results depend on the cases and documents configured in your local environment.
-
-## Screenshots
-
-Save screenshots captured from your running application in the `screenshots/` folder. Do not include passwords, bearer tokens, API keys, or other private information.
-
-Suggested filenames:
-
-1. `swagger-docs.png` — FastAPI Swagger page.
-2. `documents-list.png` — document list and configured roles.
-3. `hr-salary-search.png` — HR retrieving the Salary Administration Policy.
-4. `employee-search.png` — Employee results excluding the HR-only salary document.
-
-Once the images exist in the repository, add them to the README using these Markdown links:
-
-```markdown
-### Swagger API
-
-![Swagger API](screenshots/swagger-docs.png)
-
-### Document permissions
-
-![Document permissions](screenshots/documents-list.png)
-
-### HR retrieval
-
-![HR retrieving salary policy](screenshots/hr-salary-search.png)
-
-### Employee access restriction
-
-![Employee search excluding HR-only document](screenshots/employee-search.png)
-```
+A previous run of this project's tests reported **83 passed and 1 warning**. Run the tests again on your current checkout to confirm the current result.
 
 ## Security Notes
 
-- Do not commit `.env` files, passwords, access tokens, local databases, uploaded private documents, or vector-store data.
-- Use fictional or approved documents during demonstrations.
-- Check `.gitignore` before pushing the repository to GitHub.
-- This project is a demonstration and should receive a security review before use with confidential or production data.
+- Document access should be enforced by the backend, not only by the user interface.
+- Keep secrets and credentials out of source control.
+- Do not commit local environment files containing passwords, API keys, or other secrets.
+- Preserve `data/secure_rag.db` and `data/vector_store/` if you need to retain local application data.
+- Test each role with both permitted and restricted documents when validating authorization.
 
 ## Author
 
 **Dilshan Kumar**
 
-- GitHub: [DILSHAN-KUMAR-CR](https://github.com/DILSHAN-KUMAR-CR)
-- Repository: [secure-rag-rbac](https://github.com/DILSHAN-KUMAR-CR/secure-rag-rbac)
-
----
-
-<div align="center">
-
-Built as a demonstration of permission-aware document retrieval and role-based access control.
-
-</div>
+- **GitHub:** https://github.com/DILSHAN-KUMAR-CR
+- **Repository:** https://github.com/DILSHAN-KUMAR-CR/secure-rag-rbac
