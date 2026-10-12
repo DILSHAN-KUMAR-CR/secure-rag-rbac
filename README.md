@@ -4,10 +4,13 @@
 
 ### A permission-aware document retrieval and question-answering API
 
-![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-Permissions-003B57?logo=sqlite&logoColor=white)
-![Qdrant](https://img.shields.io/badge/Qdrant-Vector%20Search-DC244C?logo=qdrant&logoColor=white)
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![SQLite](https://img.shields.io/badge/SQLite-Permissions-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![Qdrant](https://img.shields.io/badge/Qdrant-Vector%20Search-DC244C?logo=qdrant&logoColor=white)](https://qdrant.tech/)
+[![Pytest](https://img.shields.io/badge/Tests-Pytest-0A9EDC?logo=pytest&logoColor=white)](https://pytest.org/)
+[![GitHub repo](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)](https://github.com/DILSHAN-KUMAR-CR/secure-rag-rbac)
+[![Platform](https://img.shields.io/badge/Platform-Windows-0078D4?logo=windows&logoColor=white)](https://www.microsoft.com/windows)
 
 **Authenticate · Filter permitted documents · Retrieve relevant chunks · Recheck permissions**
 
@@ -101,16 +104,14 @@ Your local project may contain additional modules or folders.
 
 ## Installation and Setup
 
-### 1. Clone your GitHub repository
-
-Replace `YOUR_GITHUB_USERNAME` with your GitHub username after creating the repository.
+### 1. Clone the repository
 
 ```powershell
-git clone https://github.com/YOUR_GITHUB_USERNAME/secure-rag-rbac.git
+git clone https://github.com/DILSHAN-KUMAR-CR/secure-rag-rbac.git
 cd secure-rag-rbac
 ```
 
-If you already have the project locally, you can skip cloning and open PowerShell in the project folder.
+If you already have the project locally, skip cloning and open PowerShell in the project folder.
 
 ### 2. Create a virtual environment
 
@@ -183,18 +184,18 @@ The evaluation compares keyword, semantic, and hybrid retrieval using Precision@
 
 ## Screenshots
 
-Add your own screenshots to the `screenshots/` folder in the repository. Capture screenshots from your running application; do not include passwords, bearer tokens, API keys, or other private information.
+Save screenshots captured from your running application in the `screenshots/` folder. Do not include passwords, bearer tokens, API keys, or other private information.
 
-Suggested screenshots:
+Suggested filenames:
 
-1. `swagger-docs.png` — the FastAPI Swagger page.
-2. `documents-list.png` — the Admin document list showing configured roles.
+1. `swagger-docs.png` — FastAPI Swagger page.
+2. `documents-list.png` — document list and configured roles.
 3. `hr-salary-search.png` — HR retrieving the Salary Administration Policy.
-4. `employee-search.png` — Employee search results that do **not** include the HR-only salary document.
+4. `employee-search.png` — Employee results excluding the HR-only salary document.
 
-After adding the image files, uncomment and update the image links below to match the filenames you actually saved:
+Once the images exist in the repository, add them to the README using these Markdown links:
 
-<!--
+```markdown
 ### Swagger API
 
 ![Swagger API](screenshots/swagger-docs.png)
@@ -210,7 +211,7 @@ After adding the image files, uncomment and update the image links below to matc
 ### Employee access restriction
 
 ![Employee search excluding HR-only document](screenshots/employee-search.png)
--->
+```
 
 ## Security Notes
 
@@ -223,10 +224,8 @@ After adding the image files, uncomment and update the image links below to matc
 
 **Dilshan Kumar**
 
-- GitHub: `https://github.com/YOUR_GITHUB_USERNAME`
-- Repository: `https://github.com/YOUR_GITHUB_USERNAME/secure-rag-rbac`
-
-Replace `YOUR_GITHUB_USERNAME` in the links and installation command after creating your repository.
+- GitHub: [DILSHAN-KUMAR-CR](https://github.com/DILSHAN-KUMAR-CR)
+- Repository: [secure-rag-rbac](https://github.com/DILSHAN-KUMAR-CR/secure-rag-rbac)
 
 ---
 
